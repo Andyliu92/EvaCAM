@@ -132,7 +132,7 @@ void BankWithHtree::Initialize(int _numRowMat, int _numColumnMat, long long _cap
 	/* Calculate the physical signals that are required in routing */
 	numAddressBit = (int)(log2((double)capacity / blockSize / associativity) + 0.1);
 			/* use double during the calculation to avoid overflow */
-	if (memoryType == data) {
+	if (memoryType == m_data) {
 		numDataDistributeBit = blockSize;
 		numDataBroadcastBit = (int)(log2(associativity));	/* TO-DO: this is not the only way */
 	} else {	/* CAM */
@@ -362,7 +362,7 @@ void BankWithHtree::Initialize(int _numRowMat, int _numColumnMat, long long _cap
 	}
 
 	/* If this mat is cache data array, determine if the number of cache ways assigned to this mat is legal */
-	if (memoryType == data) {
+	if (memoryType == m_data) {
 		if (numRowPerSet > (int)pow(2, numDataBroadcastBitToRoute)) {
 			/* There is no enough ways to distribute into multiple rows */
 			invalid = true;
@@ -373,7 +373,7 @@ void BankWithHtree::Initialize(int _numRowMat, int _numColumnMat, long long _cap
 
 	/* Determine the number of columns in a mat */
 	long matBlockSize;
-	if (memoryType == data) {		/* Data array */
+	if (memoryType == m_data) {		/* Data array */
 		/* numDataDistributeBit is the bits in a data word that is assigned to this mat */
 		matBlockSize = numDataDistributeBitToRoute;
 		numWay = (int)pow(2, numDataBroadcastBitToRoute);
@@ -453,7 +453,7 @@ void BankWithHtree::CalculateArea() {
 					numVerticalDataBroadcastBitToRoute[i]) * numVerticalWire[i] / numWireSharingWidth) * effectivePitch;
 		}
 		/* Determine if the aspect ratio meets the constraint */
-		if (memoryType == data)
+		if (memoryType == m_data)
 			if (height / width > CONSTRAINT_ASPECT_RATIO_BANK || width / height > CONSTRAINT_ASPECT_RATIO_BANK) {
 				/* illegal */
 				invalid = true;

@@ -96,7 +96,7 @@ void BankWithoutHtree::Initialize(int _numRowMat, int _numColumnMat, long long _
 	numDataBitRouteToMat = blockSize;
 
 
-	if (memoryType == data) { /* Data array */
+	if (memoryType == m_data) { /* Data array */
 		numDataBitRouteToMat = blockSize / numActiveMatPerColumn / numActiveMatPerRow;
 		if (numRowPerSet > associativity) {
 			/* There is no enough ways to distribute into multiple rows */
@@ -158,7 +158,7 @@ void BankWithoutHtree::Initialize(int _numRowMat, int _numColumnMat, long long _
 		}
 
 		int numSenseAmp;
-		if (memoryType == data)
+		if (memoryType == m_data)
 			numSenseAmp = blockSize;
 		else
 			numSenseAmp = blockSize * associativity;
@@ -212,7 +212,7 @@ void BankWithoutHtree::CalculateArea() {
 		}
 
 		/* Determine if the aspect ratio meets the constraint */
-		if (memoryType == data)
+		if (memoryType == m_data)
 			if (height / width > CONSTRAINT_ASPECT_RATIO_BANK || width / height > CONSTRAINT_ASPECT_RATIO_BANK) {
 				/* illegal */
 				invalid = true;

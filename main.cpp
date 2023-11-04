@@ -170,7 +170,7 @@ int main(int argc, char *argv[])
 			/* To aggressive partitioning */
 			continue;
 					}
-		CALCULATE(dataBank, data);
+		CALCULATE(dataBank, m_data);
 
 
 		if (!dataBank->invalid && !dataBank->mat.subarray.invalid) {
@@ -200,7 +200,7 @@ int main(int argc, char *argv[])
 				CAM_opt.BitSerialWidth = bestDataResults[i].bank->numBitSerial;
 				CAM_opt.Proirity = bestDataResults[i].bank->mat.subarray.PriorityOptLevel;
 				CAM_opt.RowDriver = bestDataResults[i].bank->mat.subarray.DriverOptLevel;
-				TRY_AND_UPDATE(bestDataResults[i], data);
+				TRY_AND_UPDATE(bestDataResults[i], m_data);
 			}
 			if (inputParameter->optimizationTarget == full_exploration && !inputParameter->isPruningEnabled) {
 				OUTPUT_TO_FILE;
@@ -216,7 +216,7 @@ int main(int argc, char *argv[])
 				CAM_opt.BitSerialWidth = bestDataResults[i].bank->numBitSerial;
 				CAM_opt.Proirity = bestDataResults[i].bank->mat.subarray.PriorityOptLevel;
 				CAM_opt.RowDriver = bestDataResults[i].bank->mat.subarray.DriverOptLevel;
-				TRY_AND_UPDATE(bestDataResults[i], data);
+				TRY_AND_UPDATE(bestDataResults[i], m_data);
 			}
 			if (inputParameter->optimizationTarget == full_exploration && !inputParameter->isPruningEnabled) {
 				OUTPUT_TO_FILE;
@@ -310,7 +310,7 @@ int main(int argc, char *argv[])
 				/* To aggressive partitioning */
 				continue;
 			}
-			CALCULATE(dataBank, data);
+			CALCULATE(dataBank, m_data);
 			if (!dataBank->invalid && dataBank->readLatency <= allowedDataReadLatency && dataBank->writeLatency <= allowedDataWriteLatency
 					&& dataBank->readDynamicEnergy <= allowedDataReadDynamicEnergy && dataBank->writeDynamicEnergy <= allowedDataWriteDynamicEnergy
 					&& dataBank->leakage <= allowedDataLeakage && dataBank->area <= allowedDataArea
