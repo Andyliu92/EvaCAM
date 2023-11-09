@@ -1,3 +1,4 @@
 *.o
 Eva-CAM
 *.log
+backup/
